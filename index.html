@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .fact-box {
+            border: 2px solid #000;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .fact-box.visible {
+            opacity: 1;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Cat Facts</h1>
+    <div id="fact-box" class="fact-box"></div>
+    <button id="new-fact-btn">Get Random Fact</button>
+    <button id="share-btn">Share to Instagram</button>
+    
+    <script>
+        const facts = [
+            "Cats have five toes on their front paws, but only four toes on their back paws.",
+            "A group of cats is called a clowder.",
+            "Cats can make over 100 different sounds, while dogs can only make about 10.",
+            "The world's oldest cat lived to be 38 years old.",
+            "Cats sleep for about 13 to 16 hours a day, which is around two-thirds of their life.",
+            "A cat's nose print is unique, much like a human's fingerprint.",
+            "Cats can rotate their ears 180 degrees.",
+            "The average cat can run up to 30 miles per hour.",
+            "Cats have a special collarbone that allows them to always land on their feet.",
+            "The meow is a form of communication that cats developed specifically for humans."
+        ];
+
+        const factBox = document.getElementById('fact-box');
+        const newFactBtn = document.getElementById('new-fact-btn');
+        const shareBtn = document.getElementById('share-btn');
+
+        newFactBtn.addEventListener('click', () => {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            factBox.textContent = randomFact;
+            factBox.classList.remove('visible');
+            setTimeout(() => {
+                factBox.classList.add('visible');
+            }, 10);
+        });
+
+        shareBtn.addEventListener('click', () => {
+            const factToShare = factBox.textContent;
+            const instagramShareUrl = `https://www.instagram.com/sharer/sharer.php?u=${encodeURIComponent(factToShare)}`;
+            window.open(instagramShareUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
